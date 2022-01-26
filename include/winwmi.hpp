@@ -88,7 +88,7 @@ public:
 
         result_ = CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 
-        if (FAILED(result_) && result_ != RPC_E_TOO_LATE)
+        if (FAILED(result_))
         {
             last_error_ = WmiError::kFailedCoInitialize;
             return;
@@ -106,7 +106,7 @@ public:
             nullptr
         );
 
-        if (FAILED(result_))
+        if (FAILED(result_) && result_ != RPC_E_TOO_LATE)
         {
             last_error_ = WmiError::kFailedCoInitializeSecurity;
             CoUninitialize();
